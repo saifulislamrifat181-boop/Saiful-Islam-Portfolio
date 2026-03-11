@@ -1,38 +1,11 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
-import { Download } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [text, setText] = useState('');
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [isInstallable, setIsInstallable] = useState(false);
   const fullText = "Saiful Islam";
-
-  useEffect(() => {
-    const handleBeforeInstallPrompt = (e: Event) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-      setIsInstallable(true);
-    };
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    };
-  }, []);
-
-  const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      setIsInstallable(false);
-    }
-    setDeferredPrompt(null);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -157,40 +130,20 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          {isInstallable && (
-            <button
-              onClick={handleInstallClick}
-              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm font-medium transition-colors border border-white/10"
-            >
-              <Download size={14} />
-              Install App
-            </button>
-          )}
         </div>
 
-        {/* Mobile Toggle & Install */}
-        <div className="md:hidden flex items-center gap-4">
-          {isInstallable && (
-            <button
-              onClick={handleInstallClick}
-              className="flex items-center gap-2 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-full text-xs font-medium transition-colors border border-white/10"
-            >
-              <Download size={12} />
-              Install
-            </button>
-          )}
-          <button
-            className="relative z-50 w-10 h-10 flex items-center justify-center text-slate-300 hover:text-white transition-colors outline-none focus:outline-none [-webkit-tap-highlight-color:transparent]"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle Menu"
-          >
-            <div className="w-6 h-5 relative flex flex-col justify-center items-center">
-              <span className={`absolute w-full h-[1.5px] bg-current transform transition-all duration-500 ease-in-out ${isOpen ? 'rotate-45' : '-translate-y-2'}`} />
-              <span className={`absolute w-full h-[1.5px] bg-current transform transition-all duration-500 ease-in-out ${isOpen ? 'opacity-0 scale-x-0' : 'opacity-100'}`} />
-              <span className={`absolute w-full h-[1.5px] bg-current transform transition-all duration-500 ease-in-out ${isOpen ? '-rotate-45' : 'translate-y-2'}`} />
-            </div>
-          </button>
-        </div>
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center text-slate-300 hover:text-white transition-colors outline-none focus:outline-none [-webkit-tap-highlight-color:transparent]"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle Menu"
+        >
+          <div className="w-6 h-5 relative flex flex-col justify-center items-center">
+            <span className={`absolute w-full h-[1.5px] bg-current transform transition-all duration-500 ease-in-out ${isOpen ? 'rotate-45' : '-translate-y-2'}`} />
+            <span className={`absolute w-full h-[1.5px] bg-current transform transition-all duration-500 ease-in-out ${isOpen ? 'opacity-0 scale-x-0' : 'opacity-100'}`} />
+            <span className={`absolute w-full h-[1.5px] bg-current transform transition-all duration-500 ease-in-out ${isOpen ? '-rotate-45' : 'translate-y-2'}`} />
+          </div>
+        </button>
       </div>
 
       {/* Mobile Nav Overlay */}
