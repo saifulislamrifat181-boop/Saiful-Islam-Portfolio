@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0f2fe" />
+      <stop offset="30%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" />
+  
+  <!-- Subtle premium rings -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="url(#textGrad)" stroke-width="2" stroke-opacity="0.15" />
+  <circle cx="256" cy="256" r="190" fill="none" stroke="url(#textGrad)" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="12 12" />
+  
+  <!-- The Letter S -->
+  <text 
+    x="50%" 
+    y="54%" 
+    font-family="Georgia, 'Times New Roman', serif" 
+    font-size="320" 
+    font-weight="bold" 
+    font-style="italic" 
+    fill="url(#textGrad)" 
+    text-anchor="middle" 
+    dominant-baseline="middle" 
+    filter="url(#shadow)"
+  >
+    S
+  </text>
+</svg>
