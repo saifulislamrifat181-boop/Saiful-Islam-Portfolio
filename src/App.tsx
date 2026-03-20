@@ -5,6 +5,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -19,39 +20,81 @@ import LoadingScreen from './components/LoadingScreen';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const { scrollYProgress } = useScroll();
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const { scrollYProgress, scrollY } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 50, // Lower stiffness for smoother movement
+    damping: 25,   // Balanced damping
     restDelta: 0.001
   });
 
   useEffect(() => {
-    // Simulate loading time for cinematic effect
+    return scrollY.on('change', (latest) => {
+      if (latest > 100) {
+        setHasScrolled(true);
+      } else {
+        setHasScrolled(false);
+      }
+    });
+  }, [scrollY]);
+
+  useEffect(() => {
+    // Initialize Lenis for ultra-smooth inertial scrolling
+    const lenis = new Lenis({
+      duration: 1.5, // Slightly longer for more "weight"
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.8, // Slightly less sensitive for control
+      touchMultiplier: 1.5,
+      infinite: false,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Adjusted loading time for stepped progress (50-70-100)
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
-    return () => clearTimeout(timer);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+      lenis.destroy();
+    };
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#030303] text-white selection:bg-sky-500/30 selection:text-sky-200 relative overflow-hidden">
+    <div className={`min-h-screen bg-[#030303] text-white selection:bg-sky-500/30 selection:text-sky-200 relative ${isLoading ? 'h-screen overflow-hidden' : 'overflow-x-hidden'}`}>
       <LoadingScreen />
       
-      <AnimatePresence>
+      {/* Premium Scroll Progress Bar - Only visible after scrolling down */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 z-[100] origin-left"
+        style={{ scaleX }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: hasScrolled ? 1 : 0 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+      />
+      
+      <AnimatePresence mode="wait">
         {!isLoading && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            key="main-content"
+            initial={{ opacity: 0, scale: 0.98, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ 
+              duration: 1.5, 
+              ease: [0.16, 1, 0.3, 1],
+              delay: 0.2 // Slight delay after panels split
+            }}
             className="relative z-10"
           >
-            {/* Scroll Progress Bar */}
-            <motion.div
-              className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500 z-[10001] origin-left"
-              style={{ scaleX }}
-            />
-            
             {/* Premium Global Background - Fixed to cover entire viewport during scroll */}
             <div className="fixed inset-0 z-0 pointer-events-none">
               {/* Optimized Cinematic Glows - Using opacity instead of movement for performance */}

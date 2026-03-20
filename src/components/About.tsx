@@ -63,31 +63,39 @@ export default function About() {
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ 
                 duration: 0.8, 
                 delay: index * 0.15, 
-                ease: [0.16, 1, 0.3, 1] 
+                ease: [0.22, 1, 0.36, 1] 
               }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="glass-card p-8 rounded-3xl group"
+              whileHover={{ 
+                y: -10,
+                transition: { duration: 0.4, ease: "easeOut" }
+              }}
+              className="relative p-8 rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-md hover:bg-white/[0.06] hover:border-sky-500/30 transition-all duration-500 group overflow-hidden"
             >
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6 border border-white/10 group-hover:bg-white/10 group-hover:border-sky-500/30 transition-all duration-500">
-                <motion.div
-                  whileHover={{ rotate: [0, -10, 10, 0] }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {feature.icon}
-                </motion.div>
+              {/* Animated Background Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 via-transparent to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:bg-sky-500/10 group-hover:border-sky-500/30 transition-all duration-500 shadow-lg">
+                  <motion.div
+                    whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {feature.icon}
+                  </motion.div>
+                </div>
+                <h3 className="text-2xl font-display font-bold mb-4 text-white group-hover:text-sky-400 transition-colors duration-300">
+                  {feature.title}
+                </h3>
+                <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
+                  {feature.description}
+                </p>
               </div>
-              <h3 className="text-2xl font-display font-semibold mb-4 text-white group-hover:text-sky-400 transition-colors">
-                {feature.title}
-              </h3>
-              <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
-                {feature.description}
-              </p>
             </motion.div>
           ))}
         </div>

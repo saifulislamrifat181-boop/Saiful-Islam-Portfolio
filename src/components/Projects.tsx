@@ -96,32 +96,48 @@ export default function Projects() {
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ 
                 duration: 0.8, 
                 delay: index * 0.1, 
-                ease: [0.16, 1, 0.3, 1] 
+                ease: [0.22, 1, 0.36, 1] 
               }}
-              whileHover={{ y: -10 }}
-              className="group relative flex flex-col rounded-3xl bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.1] hover:bg-white/[0.04] transition-all duration-500 overflow-hidden hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+              whileHover={{ 
+                y: -12,
+                transition: { duration: 0.4, ease: [0.33, 1, 0.68, 1] }
+              }}
+              className="group relative flex flex-col rounded-3xl bg-white/[0.02] border border-white/[0.05] hover:border-sky-500/40 hover:bg-white/[0.05] transition-colors duration-500 overflow-hidden hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)]"
             >
-              {/* Subtle gradient spotlight on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              {/* Premium Shimmer Effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-20">
+                <motion.div 
+                  initial={{ x: '-100%', skewX: -20 }}
+                  whileHover={{ x: '200%' }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                  className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"
+                />
+              </div>
+
+              {/* Intensified Background Glow on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/15 via-transparent to-indigo-500/15 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               
-              {/* Image Section - Bleeds to edges at top */}
+              {/* Decorative corner glow */}
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-sky-500/20 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+              
+              {/* Image Section */}
               <div className="relative h-48 md:h-52 w-full overflow-hidden border-b border-white/[0.05]">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                <img
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 z-10" />
+                <motion.img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-[0.16,1,0.3,1]"
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-[0.22,1,0.36,1]"
                   referrerPolicy="no-referrer"
                 />
                 
                 {/* Floating Icon */}
-                <div className="absolute top-4 left-4 z-20 w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-500">
+                <div className="absolute top-4 left-4 z-20 w-10 h-10 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
                   {project.icon}
                 </div>
               </div>
@@ -132,17 +148,17 @@ export default function Projects() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2.5 py-1 text-[11px] font-semibold tracking-wide uppercase text-slate-400 bg-white/[0.03] border border-white/[0.05] rounded-full"
+                      className="px-2.5 py-1 text-[10px] font-bold tracking-widest uppercase text-sky-400/80 bg-sky-500/5 border border-sky-500/10 rounded-full"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
                 
-                <h3 className={`text-2xl font-semibold text-white mb-3 group-hover:text-sky-400 transition-colors ${project.isBengali ? 'font-bengali tracking-normal' : 'font-display tracking-tight'}`}>
+                <h3 className={`text-2xl font-semibold text-white mb-3 group-hover:text-sky-400 transition-colors duration-300 ${project.isBengali ? 'font-bengali tracking-normal' : 'font-display tracking-tight'}`}>
                   {project.title}
                 </h3>
-                <p className="text-slate-400 leading-relaxed text-sm mb-8 flex-grow font-bengali">
+                <p className="text-slate-400 leading-relaxed text-sm mb-8 flex-grow font-bengali opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                   {project.description}
                 </p>
 
@@ -152,7 +168,7 @@ export default function Projects() {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/btn flex-1 inline-flex items-center justify-center gap-2 py-2.5 bg-white text-black hover:bg-slate-200 rounded-lg font-medium transition-all text-sm active:scale-95"
+                    className="group/btn flex-1 inline-flex items-center justify-center gap-2 py-2.5 bg-white text-black hover:bg-sky-50 rounded-lg font-bold transition-all text-sm active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
                   >
                     <ExternalLink size={16} className="transition-transform group-hover/btn:scale-110" />
                     Visit
@@ -162,14 +178,14 @@ export default function Projects() {
                       e.preventDefault();
                       setInstallModal({ isOpen: true, project });
                     }}
-                    className="group/btn flex-1 inline-flex items-center justify-center gap-2 py-2.5 bg-white/5 text-white hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg font-medium transition-all text-sm active:scale-95 cursor-pointer"
+                    className="group/btn flex-1 inline-flex items-center justify-center gap-2 py-2.5 bg-white/5 text-white hover:bg-white/10 border border-white/10 hover:border-sky-500/30 rounded-lg font-bold transition-all text-sm active:scale-95 cursor-pointer"
                   >
                     <Download size={16} className="transition-transform group-hover/btn:-translate-y-0.5" />
                     Install
                   </button>
                 </div>
               </div>
-          </motion.div>
+            </motion.div>
           ))}
         </div>
 

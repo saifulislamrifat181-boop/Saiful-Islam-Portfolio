@@ -108,9 +108,9 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/50 backdrop-blur-xl py-4' : 'bg-transparent py-6'
+      transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-[0.16,1,0.3,1] ${
+        scrolled ? 'bg-black/85 backdrop-blur-2xl py-4 shadow-2xl shadow-black/20' : 'bg-transparent py-7'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -128,7 +128,6 @@ export default function Navbar() {
               className="group relative text-sm font-medium text-slate-300 hover:text-white transition-colors py-2"
             >
               {link.name}
-              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-sky-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-right group-hover:origin-left" />
             </a>
           ))}
         </div>

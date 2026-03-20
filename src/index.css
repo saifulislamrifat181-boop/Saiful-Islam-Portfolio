@@ -24,7 +24,7 @@ body {
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth is handled by Lenis for a more premium inertial feel */
 }
 
 h1, h2, h3, h4, h5, h6 {

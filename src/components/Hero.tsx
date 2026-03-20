@@ -1,14 +1,42 @@
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, Mail } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function Hero() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.6,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: 1.2,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center"
+      >
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          variants={itemVariants}
           className="mb-8 relative group"
         >
           {/* Subtle elegant glow */}
@@ -60,28 +88,23 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          variants={itemVariants}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6"
         >
-          <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
           <span className="text-sm font-medium text-slate-300">Available for new opportunities</span>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl md:text-6xl font-display font-bold tracking-tighter mb-4 text-gradient"
+        <motion.div
+          variants={itemVariants}
+          className="mb-4"
         >
-          Saiful Islam
-        </motion.h1>
+          <h1 className="text-3xl md:text-6xl font-display font-bold tracking-tighter text-gradient">
+            Creative Developer
+          </h1>
+        </motion.div>
 
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          variants={itemVariants}
           className="text-xl md:text-3xl font-medium text-slate-300 mb-8"
         >
           Developer & Creator of <br className="hidden md:block" />
@@ -89,23 +112,19 @@ export default function Hero() {
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          variants={itemVariants}
           className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           "Building meaningful digital tools that combine technology with knowledge."
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          variants={itemVariants}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
             href="#projects"
-            className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-full font-medium transition-transform hover:scale-105 active:scale-95"
+            className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-full font-medium transition-all hover:scale-105 active:scale-95 shadow-lg shadow-black/10"
           >
             View My Projects
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
@@ -118,7 +137,7 @@ export default function Hero() {
             Contact Me
           </a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
