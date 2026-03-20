@@ -20,15 +20,35 @@ export default function Hero() {
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             className="relative p-3 rounded-full will-change-transform"
           >
+            {/* Animated Background Glows */}
+            <div className="absolute inset-0 z-0">
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 180, 360],
+                }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 bg-gradient-to-r from-sky-500/20 via-indigo-500/20 to-purple-500/20 blur-2xl rounded-full"
+              />
+              <motion.div
+                animate={{ 
+                  scale: [1.2, 1, 1.2],
+                  rotate: [360, 180, 0],
+                }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-10%] bg-gradient-to-l from-sky-400/10 via-transparent to-indigo-400/10 blur-3xl rounded-full"
+              />
+            </div>
+
             {/* Outer rotating thin ring */}
             <motion.div 
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 rounded-full border border-white/10 border-t-sky-400/60 border-r-indigo-400/60"
+              className="absolute inset-0 rounded-full border border-white/10 border-t-sky-400/60 border-r-indigo-400/60 z-10"
             />
             
             {/* Inner glass container */}
-            <div className="relative p-2 rounded-full bg-white/[0.02] backdrop-blur-md border border-white/10 shadow-[0_0_30px_rgba(56,189,248,0.15)]">
+            <div className="relative p-2 rounded-full bg-white/[0.02] backdrop-blur-md border border-white/10 shadow-[0_0_30px_rgba(56,189,248,0.15)] z-20">
               <img
                 src="https://i.ibb.co.com/B5Z7JPdr/1758978825142-2.jpg"
                 alt="Saiful Islam"
