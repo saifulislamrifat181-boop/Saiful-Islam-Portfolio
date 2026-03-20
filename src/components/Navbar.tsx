@@ -125,9 +125,10 @@ export default function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+              className="group relative text-sm font-medium text-slate-300 hover:text-white transition-colors py-2"
             >
               {link.name}
+              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-sky-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-right group-hover:origin-left" />
             </a>
           ))}
         </div>

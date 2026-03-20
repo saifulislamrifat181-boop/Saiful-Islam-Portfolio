@@ -63,19 +63,29 @@ export default function About() {
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-card p-8 rounded-3xl"
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.15, 
+                ease: [0.16, 1, 0.3, 1] 
+              }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card p-8 rounded-3xl group"
             >
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6 border border-white/10">
-                {feature.icon}
+              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6 border border-white/10 group-hover:bg-white/10 group-hover:border-sky-500/30 transition-all duration-500">
+                <motion.div
+                  whileHover={{ rotate: [0, -10, 10, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {feature.icon}
+                </motion.div>
               </div>
-              <h3 className="text-2xl font-display font-semibold mb-4 text-white">
+              <h3 className="text-2xl font-display font-semibold mb-4 text-white group-hover:text-sky-400 transition-colors">
                 {feature.title}
               </h3>
-              <p className="text-slate-400 leading-relaxed">
+              <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
                 {feature.description}
               </p>
             </motion.div>

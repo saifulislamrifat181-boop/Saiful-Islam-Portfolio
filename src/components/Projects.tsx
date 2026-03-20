@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Code2, BookOpen, Globe, Layout, Download, ExternalLink, X } from 'lucide-react';
+import { Sparkles, Code2, BookOpen, Globe, Layout, Download, ExternalLink, X, ShieldAlert } from 'lucide-react';
 
 const projects = [
   {
     title: 'Saiful Islam Blogs',
-    description: 'A modern blogging platform sharing insights, ideas, and reflections.',
+    description: 'একটি আধুনিক ব্লগিং প্ল্যাটফর্ম যেখানে বিভিন্ন চিন্তা, ধারণা এবং প্রতিফলন শেয়ার করা হয়।',
     link: 'https://saiful-islam-scribe-ingd.vercel.app/',
     image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=800',
     tags: ['Next.js', 'Tailwind CSS', 'MDX'],
@@ -14,7 +14,7 @@ const projects = [
   },
   {
     title: 'Rizq Planner',
-    description: 'A productivity planner designed to help manage goals, habits, and daily Rizq mindset.',
+    description: 'একটি প্রোডাক্টিভিটি প্ল্যানার যা লক্ষ্য, অভ্যাস এবং দৈনন্দিন রিজিকের মানসিকতা বজায় রাখতে সাহায্য করে।',
     link: 'https://rizq-planner-app.vercel.app/',
     image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800',
     tags: ['React', 'TypeScript', 'Framer Motion'],
@@ -23,7 +23,7 @@ const projects = [
   },
   {
     title: 'Quran AI',
-    description: 'An AI-powered Quran exploration tool that helps users understand deeper meanings.',
+    description: 'একটি এআই-চালিত কুরআন এক্সপ্লোরেশন টুল যা ব্যবহারকারীদের গভীর অর্থ বুঝতে সাহায্য করে।',
     link: 'https://quranic-insights-alpha.vercel.app/',
     image: 'https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&q=80&w=800',
     tags: ['AI Integration', 'Next.js', 'OpenAI'],
@@ -31,17 +31,17 @@ const projects = [
     isBengali: false,
   },
   {
-    title: 'দোয়া ও আমল',
-    description: 'A collection of daily duas and Islamic practices for spiritual growth.',
+    title: 'Dua & Amal',
+    description: 'আধ্যাত্মিক উন্নতির জন্য প্রতিদিনের দোয়া এবং ইসলামিক আমলের একটি সংগ্রহ।',
     link: 'https://serene-dua-one.vercel.app/',
     image: 'https://images.unsplash.com/photo-1564683214965-3619addd900d?auto=format&fit=crop&q=80&w=800',
     tags: ['PWA', 'React', 'Tailwind'],
     icon: <BookOpen className="text-rose-400" size={20} />,
-    isBengali: true,
+    isBengali: false,
   },
   {
     title: 'শব্দে শব্দে অর্থ',
-    description: 'A word-by-word Quranic vocabulary learning platform.',
+    description: 'কুরআনের শব্দভাণ্ডার শেখার জন্য একটি শব্দে শব্দে অর্থ শেখার প্ল্যাটফর্ম।',
     link: 'https://divine-lexicon.vercel.app/',
     image: 'https://images.unsplash.com/photo-1519791883288-dc8bd696e667?auto=format&fit=crop&q=80&w=800',
     tags: ['Education', 'Next.js', 'Database'],
@@ -50,12 +50,21 @@ const projects = [
   },
   {
     title: 'শব্দলেখা',
-    description: 'A language learning tool focused on improving spelling and writing.',
+    description: 'বানান এবং লেখা উন্নত করার জন্য একটি ভাষা শেখার টুল।',
     link: 'https://shuddholekha-language-lab-kpsu.vercel.app/',
     image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=800',
     tags: ['Language', 'React', 'Gamification'],
     icon: <Layout className="text-purple-400" size={20} />,
     isBengali: true,
+  },
+  {
+    title: 'SecureGuard',
+    description: 'ওয়েব নিরাপত্তার জন্য একটি ব্যাপক সিকিউরিটি স্ক্যানিং এবং সচেতনতামূলক প্ল্যাটফর্ম।',
+    link: 'https://sentinel-scan-ten.vercel.app/',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800',
+    tags: ['Security', 'React', 'Scanner'],
+    icon: <ShieldAlert className="text-red-400" size={20} />,
+    isBengali: false,
   },
 ];
 
@@ -87,11 +96,16 @@ export default function Projects() {
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative flex flex-col rounded-3xl bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.1] hover:bg-white/[0.04] transition-all duration-500 overflow-hidden hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.1, 
+                ease: [0.16, 1, 0.3, 1] 
+              }}
+              whileHover={{ y: -10 }}
+              className="group relative flex flex-col rounded-3xl bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.1] hover:bg-white/[0.04] transition-all duration-500 overflow-hidden hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
             >
               {/* Subtle gradient spotlight on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -128,7 +142,7 @@ export default function Projects() {
                 <h3 className={`text-2xl font-semibold text-white mb-3 group-hover:text-sky-400 transition-colors ${project.isBengali ? 'font-bengali tracking-normal' : 'font-display tracking-tight'}`}>
                   {project.title}
                 </h3>
-                <p className="text-slate-400 leading-relaxed text-sm mb-8 flex-grow">
+                <p className="text-slate-400 leading-relaxed text-sm mb-8 flex-grow font-bengali">
                   {project.description}
                 </p>
 

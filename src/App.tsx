@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { motion, useScroll, useSpring } from 'motion/react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -15,8 +16,21 @@ import FloatingContact from './components/FloatingContact';
 import CustomCursor from './components/CustomCursor';
 
 export default function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
     <div className="min-h-screen bg-[#030303] text-white selection:bg-sky-500/30 selection:text-sky-200 relative overflow-hidden">
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500 z-[10001] origin-left"
+        style={{ scaleX }}
+      />
+      
       {/* Premium Global Background - Fixed to cover entire viewport during scroll */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         {/* Optimized Cinematic Glows - Using opacity instead of movement for performance */}
