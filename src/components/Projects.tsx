@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Code2, BookOpen, Globe, Layout, Download, ExternalLink, X, ShieldAlert } from 'lucide-react';
+import { Sparkles, Code2, BookOpen, Globe, Layout, Download, ExternalLink, X, ShieldAlert, Mic } from 'lucide-react';
 
 const projects = [
   {
@@ -51,16 +51,25 @@ const projects = [
   {
     title: 'শব্দলেখা',
     description: 'বানান এবং লেখা উন্নত করার জন্য একটি ভাষা শেখার টুল।',
-    link: 'https://shuddholekha-language-lab-kpsu.vercel.app/',
+    link: 'https://shuddholekha-language-lab-vu1s.vercel.app/',
     image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=800',
     tags: ['Language', 'React', 'Gamification'],
     icon: <Layout className="text-purple-400" size={20} />,
     isBengali: true,
   },
   {
+    title: 'Speech Test Ai',
+    description: 'একটি এআই-চালিত স্পিচ-টু-টেক্সট টুল যা ভয়েসকে নিখুঁতভাবে টেক্সটে রূপান্তর করতে সাহায্য করে।',
+    link: 'https://sound-to-scribe-ai-4b2a4faa.vercel.app/',
+    image: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&q=80&w=800',
+    tags: ['AI', 'Speech', 'React'],
+    icon: <Mic className="text-blue-400" size={20} />,
+    isBengali: false,
+  },
+  {
     title: 'SecureGuard',
     description: 'ওয়েব নিরাপত্তার জন্য একটি ব্যাপক সিকিউরিটি স্ক্যানিং এবং সচেতনতামূলক প্ল্যাটফর্ম।',
-    link: 'https://sentinel-scan-ten.vercel.app/',
+    link: 'https://vigilant-vault-check-e979114a.vercel.app/',
     image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800',
     tags: ['Security', 'React', 'Scanner'],
     icon: <ShieldAlert className="text-red-400" size={20} />,
