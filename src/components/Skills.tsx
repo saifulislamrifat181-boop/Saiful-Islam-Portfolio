@@ -51,7 +51,7 @@ export default function Skills() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
               whileHover={{ y: -8 }}
-              className="group relative p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-md hover:bg-white/[0.07] hover:border-sky-500/40 transition-all duration-500"
+              className="group relative h-full p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-md hover:bg-white/[0.07] hover:border-sky-500/40 transition-all duration-500"
             >
               {/* Premium Card Glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-sky-500/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem] pointer-events-none" />
