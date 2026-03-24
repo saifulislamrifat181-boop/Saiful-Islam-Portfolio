@@ -73,7 +73,6 @@ export default function CustomCursor() {
           translateY: '-50%',
           opacity: isVisible ? 1 : 0,
         }}
-        transition={{ duration: 0.15 }}
       />
       {/* Larger glowing ring that follows with a spring physics delay */}
       <motion.div

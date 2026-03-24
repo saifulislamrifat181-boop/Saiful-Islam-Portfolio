@@ -8,20 +8,19 @@ export default function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.6,
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      filter: 'blur(0px)',
       transition: {
-        duration: 1.2,
+        duration: 0.8,
         ease: [0.16, 1, 0.3, 1],
       },
     },
